@@ -1,0 +1,23 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API de Piadas secas",
+    "description": "",
+    "version": "1.0"
+  },
+  "produces": ["application/json"],
+  "host": "localhost:5000",
+  "basePath": "/api/swagger/v1",
+  "paths": {
+    "/piadas": {
+      "get": {
+        "x-swagger-router-controller": "middleware-name1",
+        "operationId": "swagTest",
+        "tags": ["Piadas"],
+        "description": "Obter todas as piadas",
+        "parameters": ["joke"],
+        "responses": {}
+      }
+    }
+  }
+}

@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 
 const PiadaSchema = mongoose.Schema({
-    joke: String,
+    joke: {
+        type:String,
+        required: true
+    },
     response: String,
     category: Array,
-}, {
-    timestamps: true
 });
 
 module.exports = mongoose.model('Piadas', PiadaSchema);
