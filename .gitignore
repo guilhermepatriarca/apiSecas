@@ -1,0 +1,4 @@
+// node_mudules
+node_modules/
+// env
+.env
