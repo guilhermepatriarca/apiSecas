@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const cors = require('cors')
@@ -11,26 +11,26 @@ const swaggerUi = require('swagger-ui-express')
 const port = process.env.PORT || 5000
 const database = process.env.DATABASE
 
-
 const options = {
   definition: {
     info: {
       title: 'API Piadas Secas', // Title (required)
-      version: '1.0.0', // Version (required)
-    },
+      version: '1.0.0' // Version (required)
+    }
   },
-    tags: [
-      {
-      name: "Piadas",
-      description: "API for piadas in the system"
-      }
-    ],
-    // Path to the API docs
-    apis: ['./routes/index.js'],
+  tags: [
+    {
+      name: 'Piadas',
+      description: 'API for piadas in the system'
+    }
+  ],
+  // Path to the API docs
+  apis: ['./routes/index.js'],
+  jsonEditor: true
 }
-  
-  // Initialize swagger-jsdoc -> returns validated swagger spec in json format
-  const swaggerSpec = swaggerJSDoc(options)
+
+// Initialize swagger-jsdoc -> returns validated swagger spec in json format
+const swaggerSpec = swaggerJSDoc(options)
 
 // middleware
 // adding Helmet to enhance your API's security
@@ -41,19 +41,19 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // Configuring the database
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise
 
 // Connecting to the database
 mongoose.connect(database, {
-    useNewUrlParser: true
+  useNewUrlParser: true
 }).then(() => {
-    console.log("Successfully connected to the database");    
+  console.log('Successfully connected to the database')
 }).catch(err => {
-    console.log('Could not connect to the database. Exiting now...', err);
-    process.exit()
-});
+  console.log('Could not connect to the database. Exiting now...', err)
+  process.exit()
+})
 
 // enabling CORS for all requests
 app.use(cors())
@@ -63,8 +63,9 @@ app.use(morgan('combined'))
 
 // Require Notes routes
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+
 require('./routes/index')(app)
 
 app.listen(port, () => {
- console.log(`Server running on port ${port}`);
+  console.log(`Server running on port ${port}`)
 })

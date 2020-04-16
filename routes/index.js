@@ -1,6 +1,6 @@
 module.exports = (app) => {
-  const piadas = require('../controllers/paidas.controller');
-/**
+  const piadas = require('../controllers/paidas.controller')
+  /**
  * @swagger
  *
  * definitions:
@@ -17,10 +17,10 @@ module.exports = (app) => {
  *         type: array
  *         items:
  *           type: string
- * 
+ *
  */
 
-/**
+  /**
  * @swagger
  * /piadas:
  *   get:
@@ -38,8 +38,8 @@ module.exports = (app) => {
  *             $ref: '#/definitions/Piada'
  */
   // Retrieve all piadas
-  app.get('/piadas', piadas.findAll);
-/**
+  app.get('/piadas', piadas.findAll)
+  /**
  * @swagger
  *
  * /piadas:
@@ -49,14 +49,25 @@ module.exports = (app) => {
  *     description: Creates piada
  *     produces:
  *       - application/json
- *     parameters:
- *       - joke: user
- *         description: Piada Object
- *         in:  body
- *         required: true
- *         type: string
+ *     content:
+ *       application/json:
  *         schema:
  *           $ref: '#/definitions/Piada'
+ *     parameters:
+ *       - name: Piada
+ *         in: body
+ *         description: paida object
+ *         required: true
+ *         schema:
+ *          $ref: '#/definitions/Piada'
+ *          minimum: 1
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             oneOf:
+ *               $ref: '#/definitions/Piada'
  *     responses:
  *       200:
  *         description: piadas
@@ -64,8 +75,8 @@ module.exports = (app) => {
  *           $ref: '#/definitions/Piada'
  */
   // Create a new Note
-  app.post('/piadas', piadas.create);
-/**
+  app.post('/piadas', piadas.create)
+  /**
  * @swagger
  * /piadaRandom:
  *   get:
@@ -78,14 +89,12 @@ module.exports = (app) => {
  *       200:
  *         description: Piadas
  *         schema:
- *           type: object
- *           items:
- *             $ref: '#/definitions/Piada'
+ *           $ref: '#/definitions/Piada'
  */
   // Retrieve random piada
-  app.get('/piadaRandom', piadas.random);
+  app.get('/piadaRandom', piadas.random)
 
-/**
+  /**
  * @swagger
  * /piadas/{piadaId}:
  *   get:
@@ -105,13 +114,11 @@ module.exports = (app) => {
  *       200:
  *         description: Piadas
  *         schema:
- *           type: object
- *           items:
- *             $ref: '#/definitions/Piada'
+ *           $ref: '#/definitions/Piada'
  */
   // Retrieve a single Note with noteId
-  app.get('/piadas/:piadaId', piadas.findOne);
-/**
+  app.get('/piadas/:piadaId', piadas.findOne)
+  /**
  * @swagger
  *
  * /piadas/{piadaId}:
@@ -122,22 +129,21 @@ module.exports = (app) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: piadaId
- *         in: path
- *         description: ID of piada to return
+ *       - name: Piada
+ *         in: body
+ *         description: paida object
  *         required: true
- *         type: string
- *         format: string
  *         schema:
- *           $ref: '#/definitions/Piada'
+ *          $ref: '#/definitions/Piada'
+ *          minimum: 1
  *     responses:
  *       204:
- *         description: iada
- * 
+ *         description: piada
+ *
  */
   // Update a Note with noteId
-  app.put('/piadas/:piadaId', piadas.update);
-/**
+  app.put('/piadas/:piadaId', piadas.update)
+  /**
  * @swagger
  *
  * /piadas/{piadaId}:
@@ -155,11 +161,12 @@ module.exports = (app) => {
  *         type: string
  *         format: string
  *         schema:
- *           $ref: '#/definitions/Piada'
+ *           oneOf:
+ *             $ref: '#/definitions/Piada'
  *     responses:
  *       200:
- *         description: piada delete
+ *         description: ok
  */
   // Delete a Note with noteId
-  app.delete('/piadas/:piadaId', piadas.delete);
+  app.delete('/piadas/:piadaId', piadas.delete)
 }
