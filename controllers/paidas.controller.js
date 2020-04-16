@@ -42,6 +42,7 @@ exports.findAll = (req, res) => {
 
 // Find a single piada with a piadaId
 exports.findOne = (req, res) => {
+    console.log('req.params', req.params)
   Piadas.findById(req.params.piadaId)
   .then(piada => {
       if(!piada) {

@@ -24,6 +24,8 @@ module.exports = (app) => {
  * @swagger
  * /piadas:
  *   get:
+ *     tags:
+ *       - "Piadas"
  *     description: Returns piadas
  *     produces:
  *      - application/json
@@ -42,6 +44,8 @@ module.exports = (app) => {
  *
  * /piadas:
  *   post:
+ *     tags:
+ *       - "Piadas"
  *     description: Creates piada
  *     produces:
  *       - application/json
@@ -65,6 +69,8 @@ module.exports = (app) => {
  * @swagger
  * /piadaRandom:
  *   get:
+ *     tags:
+ *       - "Piadas"
  *     description: Returns piada
  *     produces:
  *      - application/json
@@ -81,11 +87,20 @@ module.exports = (app) => {
 
 /**
  * @swagger
- * /piada/${piadaId}:
+ * /piadas/{piadaId}:
  *   get:
+ *     tags:
+ *       - "Piadas"
  *     description: Returns piada
  *     produces:
  *      - application/json
+ *     parameters:
+ *       - name: piadaId
+ *         in: path
+ *         description: ID of piada to return
+ *         required: true
+ *         type: string
+ *         format: string
  *     responses:
  *       200:
  *         description: Piadas
@@ -99,17 +114,20 @@ module.exports = (app) => {
 /**
  * @swagger
  *
- * /piadas:
+ * /piadas/{piadaId}:
  *   put:
+ *     tags:
+ *       - "Piadas"
  *     description: Creates a user
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: user
- *         description: Piada Object
- *         in:  body
+ *       - name: piadaId
+ *         in: path
+ *         description: ID of piada to return
  *         required: true
  *         type: string
+ *         format: string
  *         schema:
  *           $ref: '#/definitions/Piada'
  *     responses:
@@ -122,17 +140,20 @@ module.exports = (app) => {
 /**
  * @swagger
  *
- * /piadas:
+ * /piadas/{piadaId}:
  *   delete:
+ *     tags:
+ *       - "Piadas"
  *     description: Delete a piada
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: user
- *         description: Piada Object
- *         in:  body
+ *       - name: piadaId
+ *         in: path
+ *         description: ID of piada to return
  *         required: true
  *         type: string
+ *         format: string
  *         schema:
  *           $ref: '#/definitions/Piada'
  *     responses:

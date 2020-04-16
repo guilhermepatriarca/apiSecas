@@ -13,18 +13,24 @@ const database = process.env.DATABASE
 
 
 const options = {
-    definition: {
-      info: {
-        title: 'API Piadas Secas', // Title (required)
-        version: '1.0.0', // Version (required)
-      },
+  definition: {
+    info: {
+      title: 'API Piadas Secas', // Title (required)
+      version: '1.0.0', // Version (required)
     },
+  },
+    tags: [
+      {
+      name: "Piadas",
+      description: "API for piadas in the system"
+      }
+    ],
     // Path to the API docs
     apis: ['./routes/index.js'],
-  };
+}
   
   // Initialize swagger-jsdoc -> returns validated swagger spec in json format
-  const swaggerSpec = swaggerJSDoc(options);
+  const swaggerSpec = swaggerJSDoc(options)
 
 // middleware
 // adding Helmet to enhance your API's security
