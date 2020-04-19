@@ -1,7 +1,7 @@
-const Piadas = require('../models/piadas.model')
+import Piadas from '../models/piadas.model'
 
 // Create and Save a new piada
-exports.create = (req, res) => {
+export const create = (req, res) => {
   console.log('req', req.body)
   // Validate request
   if (!req.body) {
@@ -34,7 +34,7 @@ exports.create = (req, res) => {
 }
 
 // Retrieve and return all piadas from the database.
-exports.findAll = (req, res) => {
+export const findAll = (req, res) => {
   Piadas.find()
     .then(piadas => {
       res.send(piadas)
@@ -46,7 +46,7 @@ exports.findAll = (req, res) => {
 }
 
 // Find a single piada with a piadaId
-exports.findOne = (req, res) => {
+export const findOne = (req, res) => {
   console.log('req.params', req.params)
   Piadas.findById(req.params.piadaId)
     .then(piada => {
@@ -69,7 +69,7 @@ exports.findOne = (req, res) => {
 }
 
 // Update a piada identified by the piadaId in the request
-exports.update = (req, res) => {
+export const update = (req, res) => {
 // Validate Request
   if (!req.body.content) {
     return res.status(400).send({
@@ -103,7 +103,7 @@ exports.update = (req, res) => {
 }
 
 // Delete a piada with the specified piadaId in the request
-exports.delete = (req, res) => {
+export const remove = (req, res) => {
   Piadas.findByIdAndRemove(req.params.piadaId)
     .then(piada => {
       if (!piada) {
@@ -125,7 +125,7 @@ exports.delete = (req, res) => {
 }
 
 // Delete a piada with the specified piadaId in the request
-exports.random = (req, res) => {
+export const random = (req, res) => {
   Piadas.aggregate([{ $sample: { size: 1 } }])
     .then(piadas => {
       // Get position 0 from array

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const PiadaSchema = mongoose.Schema({
   joke: {
@@ -11,4 +11,4 @@ const PiadaSchema = mongoose.Schema({
   versionKey: false // You should be aware of the outcome after set to false
 })
 
-module.exports = mongoose.model('Piadas', PiadaSchema)
+export default mongoose.model('Piadas', PiadaSchema)

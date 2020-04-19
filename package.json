@@ -4,9 +4,10 @@
   "description": "api ",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js",
-    "commit": "git-cz"
+    "dev": "nodemon node_modules/.bin/babel-node ./src/index.js",
+    "start": "node node_modules/.bin/babel-node ./src/index.js",
+    "commit": "git-cz",
+    "babel-node": "babel-node --presets=/*a*/ --ignore='foo|bar|baz'"
   },
   "keywords": [
     "nodeJs",
@@ -29,6 +30,8 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "cz-conventional-changelog": "^3.1.0",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.1",
@@ -41,7 +44,8 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "post-commit": "git push"
     }
   },
   "config": {

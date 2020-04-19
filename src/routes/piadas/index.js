@@ -1,6 +1,9 @@
-module.exports = (app) => {
-  const piadas = require('../controllers/paidas.controller')
-  /**
+import { Router } from 'express'
+import piadasController from '../../controllers/paidas.controller'
+const piadas = Router()
+
+export default () => {
+/**
  * @swagger
  *
  * definitions:
@@ -38,7 +41,7 @@ module.exports = (app) => {
  *             $ref: '#/definitions/Piada'
  */
   // Retrieve all piadas
-  app.get('/piadas', piadas.findAll)
+  piadas.get('/', piadasController.findAll)
   /**
  * @swagger
  *
@@ -75,7 +78,7 @@ module.exports = (app) => {
  *           $ref: '#/definitions/Piada'
  */
   // Create a new Note
-  app.post('/piadas', piadas.create)
+  piadas.post('/all', piadasController.create)
   /**
  * @swagger
  * /piadaRandom:
@@ -92,7 +95,7 @@ module.exports = (app) => {
  *           $ref: '#/definitions/Piada'
  */
   // Retrieve random piada
-  app.get('/piadaRandom', piadas.random)
+  piadas.get('/random', piadasController.random)
 
   /**
  * @swagger
@@ -117,7 +120,7 @@ module.exports = (app) => {
  *           $ref: '#/definitions/Piada'
  */
   // Retrieve a single Note with noteId
-  app.get('/piadas/:piadaId', piadas.findOne)
+  piadas.get('/:piadaId', piadasController.findOne)
   /**
  * @swagger
  *
@@ -142,7 +145,7 @@ module.exports = (app) => {
  *
  */
   // Update a Note with noteId
-  app.put('/piadas/:piadaId', piadas.update)
+  piadas.put('/:piadaId', piadasController.update)
   /**
  * @swagger
  *
@@ -168,5 +171,5 @@ module.exports = (app) => {
  *         description: ok
  */
   // Delete a Note with noteId
-  app.delete('/piadas/:piadaId', piadas.delete)
+  piadas.delete('/:piadaId', piadasController.remove)
 }

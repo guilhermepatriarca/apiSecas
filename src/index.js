@@ -1,36 +1,19 @@
-const express = require('express')
-const morgan = require('morgan')
-const helmet = require('helmet')
-const cors = require('cors')
-const bodyParser = require('body-parser')
-require('dotenv').config()
-const app = express()
-const swaggerJSDoc = require('swagger-jsdoc')
-const swaggerUi = require('swagger-ui-express')
+import express from 'express'
+import morgan from 'morgan'
+import helmet from 'helmet'
+import cors from 'cors'
+import bodyParser from 'body-parser'
+import dotenv from 'dotenv'
+import swaggerUi from 'swagger-ui-express'
 
+import routes from './routes'
+import sawggerConfig from './swaggerConfig'
+
+dotenv.config()
+
+const app = express()
 const port = process.env.PORT || 5000
 const database = process.env.DATABASE
-
-const options = {
-  definition: {
-    info: {
-      title: 'API Piadas Secas', // Title (required)
-      version: '1.0.0' // Version (required)
-    }
-  },
-  tags: [
-    {
-      name: 'Piadas',
-      description: 'API for piadas in the system'
-    }
-  ],
-  // Path to the API docs
-  apis: ['./routes/index.js'],
-  jsonEditor: true
-}
-
-// Initialize swagger-jsdoc -> returns validated swagger spec in json format
-const swaggerSpec = swaggerJSDoc(options)
 
 // middleware
 // adding Helmet to enhance your API's security
@@ -62,9 +45,9 @@ app.use(cors())
 app.use(morgan('combined'))
 
 // Require Notes routes
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
-
-require('./routes/index')(app)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(sawggerConfig))
+// API
+app.use('/', routes)
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
