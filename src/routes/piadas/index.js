@@ -77,8 +77,9 @@ export default () => {
  *         schema:
  *           $ref: '#/definitions/Piada'
  */
-  // Create a new Note
+  // Create a new piada
   piadas.post('/all', piadasController.create)
+
   /**
  * @swagger
  * /piadaRandom:

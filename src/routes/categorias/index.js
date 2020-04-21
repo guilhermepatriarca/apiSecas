@@ -7,15 +7,11 @@ export default () => {
  * @swagger
  *
  * definitions:
- *   Piada:
+ *   Categoria:
  *     type: object
  *     required:
  *       - joke
  *     properties:
- *       joke:
- *         type: string
- *       response:
- *         type: string
  *       category:
  *         type: array
  *         items:
@@ -25,7 +21,7 @@ export default () => {
 
   /**
  * @swagger
- * /piadas:
+ * /categorias:
  *   get:
  *     tags:
  *       - "Categorias"
@@ -34,35 +30,35 @@ export default () => {
  *      - application/json
  *     responses:
  *       200:
- *         description: Piadas
+ *         description: All Categorias
  *         schema:
  *           type: array
  *           items:
- *             $ref: '#/definitions/Piada'
+ *             $ref: '#/definitions/Categoria'
  */
   // Retrieve all piadas
   categorias.get('/', categoriasController.findAll)
   /**
  * @swagger
  *
- * /piadas:
+ * /categorias:
  *   post:
  *     tags:
  *       - "Categorias"
- *     description: Creates piada
+ *     description: Creates Categoria
  *     produces:
  *       - application/json
  *     content:
  *       application/json:
  *         schema:
- *           $ref: '#/definitions/Piada'
+ *           $ref: '#/definitions/Categoria'
  *     parameters:
  *       - name: Piada
  *         in: body
  *         description: paida object
  *         required: true
  *         schema:
- *          $ref: '#/definitions/Piada'
+ *          $ref: '#/definitions/Categoria'
  *          minimum: 1
  *     requestBody:
  *       required: true
@@ -70,12 +66,12 @@ export default () => {
  *         application/json:
  *           schema:
  *             oneOf:
- *               $ref: '#/definitions/Piada'
+ *               $ref: '#/definitions/Categoria'
  *     responses:
  *       200:
  *         description: piadas
  *         schema:
- *           $ref: '#/definitions/Piada'
+ *           $ref: '#/definitions/Categoria'
  */
   // Retrieve a single Note with noteId
   categorias.get('/:piadaId', categoriasController.findOne)
