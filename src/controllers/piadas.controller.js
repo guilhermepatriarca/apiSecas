@@ -2,11 +2,10 @@ import Piadas from '../models/piadas.model'
 
 // Create and Save a new piada
 export const create = (req, res) => {
-  console.log('req', req.body)
   // Validate request
   if (!req.body) {
     return res.status(400).send({
-      message: 'piada content can not be empty'
+      message: 'Tem de ter um objeto piada, senão não tem piada -.-'
     })
   }
 
@@ -37,7 +36,7 @@ export const create = (req, res) => {
 export const findAll = (req, res) => {
   Piadas.find()
     .then(piadas => {
-      res.send(piadas)
+      res.status(200).send({ count: piadas.length, data: piadas })
     }).catch(err => {
       res.status(500).send({
         message: err.message || 'Não tem piada mas existe um erro...'
@@ -47,7 +46,6 @@ export const findAll = (req, res) => {
 
 // Find a single piada with a piadaId
 export const findOne = (req, res) => {
-  console.log('req.params', req.params)
   Piadas.findById(req.params.piadaId)
     .then(piada => {
       if (!piada) {
@@ -70,10 +68,10 @@ export const findOne = (req, res) => {
 
 // Update a piada identified by the piadaId in the request
 export const update = (req, res) => {
-// Validate Request
-  if (!req.body.content) {
+  // Validate Request
+  if (!req.body) {
     return res.status(400).send({
-      message: 'Para ter piada tem de ter piada'
+      message: 'Tem de ter um objeto piada, senão não tem piada -.-'
     })
   }
 
