@@ -1,8 +1,8 @@
-import { Router } from 'express'
-import piadasController from '../../controllers/paidas.controller'
+import Router from 'express'
+import { create, update, remove, findAll, findOne, random } from '../../controllers/piadas.controller'
+
 const piadas = Router()
 
-export default () => {
 /**
  * @swagger
  *
@@ -23,7 +23,7 @@ export default () => {
  *
  */
 
-  /**
+/**
  * @swagger
  * /piadas:
  *   get:
@@ -40,9 +40,10 @@ export default () => {
  *           items:
  *             $ref: '#/definitions/Piada'
  */
-  // Retrieve all piadas
-  piadas.get('/', piadasController.findAll)
-  /**
+// Retrieve all piadas
+piadas.get('/', findAll)
+
+/**
  * @swagger
  *
  * /piadas:
@@ -59,7 +60,7 @@ export default () => {
  *     parameters:
  *       - name: Piada
  *         in: body
- *         description: paida object
+ *         description: piada object
  *         required: true
  *         schema:
  *          $ref: '#/definitions/Piada'
@@ -77,12 +78,12 @@ export default () => {
  *         schema:
  *           $ref: '#/definitions/Piada'
  */
-  // Create a new piada
-  piadas.post('/all', piadasController.create)
+// Create a new Piada
+piadas.post('/', create)
 
-  /**
+/**
  * @swagger
- * /piadaRandom:
+ * /piadas/random:
  *   get:
  *     tags:
  *       - "Piadas"
@@ -95,10 +96,10 @@ export default () => {
  *         schema:
  *           $ref: '#/definitions/Piada'
  */
-  // Retrieve random piada
-  piadas.get('/random', piadasController.random)
+// Retrieve random piada
+piadas.get('/random', random)
 
-  /**
+/**
  * @swagger
  * /piadas/{piadaId}:
  *   get:
@@ -120,9 +121,10 @@ export default () => {
  *         schema:
  *           $ref: '#/definitions/Piada'
  */
-  // Retrieve a single Note with noteId
-  piadas.get('/:piadaId', piadasController.findOne)
-  /**
+// Retrieve a single Note with noteId
+piadas.get('/:piadaId', findOne)
+
+/**
  * @swagger
  *
  * /piadas/{piadaId}:
@@ -135,7 +137,7 @@ export default () => {
  *     parameters:
  *       - name: Piada
  *         in: body
- *         description: paida object
+ *         description: piada object
  *         required: true
  *         schema:
  *          $ref: '#/definitions/Piada'
@@ -145,9 +147,10 @@ export default () => {
  *         description: piada
  *
  */
-  // Update a Note with noteId
-  piadas.put('/:piadaId', piadasController.update)
-  /**
+// Update a Note with noteId
+piadas.put('/:piadaId', update)
+
+/**
  * @swagger
  *
  * /piadas/{piadaId}:
@@ -171,6 +174,7 @@ export default () => {
  *       200:
  *         description: ok
  */
-  // Delete a Note with noteId
-  piadas.delete('/:piadaId', piadasController.remove)
-}
+// Delete a Note with noteId
+piadas.delete('/:piadaId', remove)
+
+export default piadas

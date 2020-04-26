@@ -1,8 +1,8 @@
-import { Router } from 'express'
-import paidas from './piadas'
+import Router from 'express'
+import piadas from './piadas'
 
 const routes = Router()
 
-routes.use('/paidas', paidas)
+routes.use('/piadas', piadas)
 
 export default routes

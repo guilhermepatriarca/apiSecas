@@ -4,10 +4,12 @@
   "description": "api ",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon node_modules/.bin/babel-node ./src/index.js",
-    "start": "node node_modules/.bin/babel-node ./src/index.js",
+    "dev": "nodemon build/index.js",
+    "start": " npm run clean && npm run build && node build/index.js",
     "commit": "git-cz",
-    "babel-node": "babel-node --presets=/*a*/ --ignore='foo|bar|baz'"
+    "clean": "rm -rf build/*",
+    "build": "npx babel -d ./build ./src",
+    "babel-node": "babel-node"
   },
   "keywords": [
     "nodeJs",
@@ -17,6 +19,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -30,8 +35,6 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "cz-conventional-changelog": "^3.1.0",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.1",
