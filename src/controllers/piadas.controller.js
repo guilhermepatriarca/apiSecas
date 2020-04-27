@@ -34,14 +34,27 @@ export const create = (req, res) => {
 
 // Retrieve and return all piadas from the database.
 export const findAll = (req, res) => {
-  Piadas.find()
-    .then(piadas => {
-      res.status(200).send({ count: piadas.length, data: piadas })
-    }).catch(err => {
-      res.status(500).send({
-        message: err.message || 'Não tem piada mas existe um erro...'
+  console.log('res', req.query)
+  if (req.query.category) {
+    Piadas.find({ category: req.query.category })
+      .then(piadas => {
+        console.log('piadas', piadas)
+        res.status(200).send({ count: piadas.length, data: piadas })
+      }).catch(err => {
+        res.status(500).send({
+          message: err.message || 'Não tem piada mas existe um erro...'
+        })
       })
-    })
+  } else {
+    Piadas.find()
+      .then(piadas => {
+        res.status(200).send({ count: piadas.length, data: piadas })
+      }).catch(err => {
+        res.status(500).send({
+          message: err.message || 'Não tem piada mas existe um erro...'
+        })
+      })
+  }
 }
 
 // Find a single piada with a piadaId
@@ -66,7 +79,7 @@ export const findOne = (req, res) => {
     })
 }
 
-// Update a piada identified by the piadaId in the request
+// Update a piada
 export const update = (req, res) => {
   // Validate Request
   if (!req.body) {
@@ -75,7 +88,7 @@ export const update = (req, res) => {
     })
   }
 
-  // Find piada and update it with the request body
+  // Find piada
   Piadas.findByIdAndUpdate(req.params.piadaId, {
     joke: req.body.joke,
     response: req.body.response,
@@ -100,7 +113,7 @@ export const update = (req, res) => {
     })
 }
 
-// Delete a piada with the specified piadaId in the request
+// Delete piada
 export const remove = (req, res) => {
   Piadas.findByIdAndRemove(req.params.piadaId)
     .then(piada => {
@@ -122,7 +135,7 @@ export const remove = (req, res) => {
     })
 }
 
-// Delete a piada with the specified piadaId in the request
+// Random a piada
 export const random = (req, res) => {
   Piadas.aggregate([{ $sample: { size: 1 } }])
     .then(piadas => {
