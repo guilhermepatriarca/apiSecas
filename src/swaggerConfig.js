@@ -14,7 +14,10 @@ const options = {
     }
   ],
   // Path to the API docs
-  apis: ['src/routes/piadas/index.js']
+  apis: [
+    'src/routes/piadas/index.js',
+    'src/routes/categorias/index.js'
+  ]
 }
 
 export default swaggerJSDoc(options)
