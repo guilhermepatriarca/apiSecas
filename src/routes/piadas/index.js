@@ -32,6 +32,12 @@ const piadas = Router()
  *     description: Returns piadas
  *     produces:
  *      - application/json
+ *     parameters:
+ *       - in: query
+ *         name: category
+ *         schema:
+ *           type: string
+ *         description: the name of category
  *     responses:
  *       200:
  *         description: Piadas
