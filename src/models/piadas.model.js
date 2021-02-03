@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const PiadaSchema = mongoose.Schema({
+const piadaSchema = mongoose.Schema({
   joke: {
     type: String,
     required: true
@@ -11,4 +11,4 @@ const PiadaSchema = mongoose.Schema({
   versionKey: false // You should be aware of the outcome after set to false
 })
 
-export default mongoose.model('Piadas', PiadaSchema)
+export default mongoose.model('Piadas', piadaSchema)

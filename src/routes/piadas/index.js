@@ -1,5 +1,13 @@
 import Router from 'express'
-import { create, update, remove, findAll, findOne, random } from '../../controllers/piadas.controller'
+import {
+  create,
+  update,
+  remove,
+  findAll,
+  findOne,
+  random
+} from '../../controllers/piadas.controller'
+import auth from '../../midleware/authentication'
 
 const piadas = Router()
 
@@ -54,6 +62,8 @@ piadas.get('/', findAll)
  *
  * /piadas:
  *   post:
+ *     security:              # <--- ADD THIS
+ *       - bearerAuth: [read]     # <--- ADD THIS
  *     tags:
  *       - "Piadas"
  *     description: Creates piada
@@ -85,7 +95,7 @@ piadas.get('/', findAll)
  *           $ref: '#/definitions/Piada'
  */
 // Create a new Piada
-piadas.post('/', create)
+piadas.post('/', auth, create)
 
 /**
  * @swagger
@@ -96,6 +106,12 @@ piadas.post('/', create)
  *     description: Returns piada
  *     produces:
  *      - application/json
+ *     parameters:
+ *       - in: query
+ *         name: category
+ *         schema:
+ *           type: string
+ *         description: the name of category
  *     responses:
  *       200:
  *         description: Piadas
@@ -154,7 +170,7 @@ piadas.get('/:piadaId', findOne)
  *
  */
 // Update a Note with noteId
-piadas.put('/:piadaId', update)
+piadas.put('/:piadaId', auth, update)
 
 /**
  * @swagger
@@ -181,6 +197,6 @@ piadas.put('/:piadaId', update)
  *         description: ok
  */
 // Delete a Note with noteId
-piadas.delete('/:piadaId', remove)
+piadas.delete('/:piadaId', auth, remove)
 
 export default piadas

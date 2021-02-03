@@ -137,8 +137,14 @@ export const remove = (req, res) => {
 
 // Random a piada
 export const random = (req, res) => {
-  Piadas.aggregate([{ $sample: { size: 1 } }])
+  const aggregateArray = [{ $sample: { size: 1 } }]
+  if (req.query.category) {
+    aggregateArray.push({ $match: { $expr: { category: req.query.category } } })
+  }
+  console.log('aggregateArray', aggregateArray)
+  Piadas.aggregate(aggregateArray)
     .then(piadas => {
+      console.log('piadas', piadas)
       // Get position 0 from array
       res.status(200).send(piadas[0])
     }).catch(err => {

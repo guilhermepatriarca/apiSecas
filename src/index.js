@@ -5,6 +5,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
 import swaggerUi from 'swagger-ui-express'
+import '@babel/polyfill'
 
 import routes from './routes'
 import sawggerConfig from './swaggerConfig'
@@ -47,7 +48,7 @@ app.use(morgan('combined'))
 // Require Notes routes
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(sawggerConfig))
 // API
-app.use('/', routes)
+app.use('/api', routes)
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
