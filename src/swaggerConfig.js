@@ -1,22 +1,39 @@
 import swaggerJSDoc from 'swagger-jsdoc'
 
 const options = {
-  definition: {
+  swaggerDefinition: {
+    openapi: '3.0.3', // YOU NEED THIS
     info: {
-      title: 'API Piadas Secas', // Title (required)
-      version: '1.0.0' // Version (required)
-    }
+      title: 'Piadas Secas',
+      version: '1.0.0',
+      description: 'Piadas Secas'
+    },
+    basePath: '/api',
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT'
+        }
+      }
+    },
+    security: [{
+      bearerAuth: [
+
+      ]
+    }]
   },
   tags: [
     {
       name: 'Piadas',
-      description: 'API for piadas in the system'
+      description: 'API for Piadas Secas'
     }
   ],
   // Path to the API docs
   apis: [
     'src/routes/piadas/index.js',
-    'src/routes/categorias/index.js'
+    'src/routes/users/index.js'
   ]
 }
 

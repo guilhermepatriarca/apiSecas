@@ -1,0 +1,6 @@
+{
+    "uid": "apiSecas",
+    "append": true,
+    "watch": true,
+    "script": "build/index.js"
+}
