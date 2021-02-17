@@ -38,7 +38,7 @@ const users = Router()
 // Create a new User
 /**
  * @swagger
- * /users:
+ * /api/users:
  *   post:
  *     tags:
  *       - "User"
@@ -74,7 +74,7 @@ users.post('/', create, async (req, res) => {
 })
 /**
  * @swagger
- * /users/login:
+ * /api/users/login:
  *   post:
  *     tags:
  *       - "User"
@@ -102,18 +102,22 @@ users.post('/', create, async (req, res) => {
  *           type: object
  *           items:
  *             $ref: '#/definitions/User'
+ *       401:
+ *         description: error information
+ *         schema:
+ *           type: object
  */
 // Login User
 users.post('/login', login)
 /**
  * @swagger
- * /users/me:
+ * /api/users/me:
  *   get:
+ *     security:
+ *       - bearerAuth: [admin]
  *     tags:
  *       - "User"
  *     description: Get information about user
- *     security:
- *      - OAuth2: [admin]   # Use OAuth with a different scope
  *     produces:
  *      - application/json
  *     responses:
@@ -133,8 +137,10 @@ users.get('/me', authentication, async (req, res) => {
 
 /**
  * @swagger
- * /users/all:
+ * /api/users/all:
  *   get:
+ *     security:
+ *       - bearerAuth: [admin]
  *     tags:
  *       - "User"
  *     description: Get information about all users
@@ -153,8 +159,10 @@ users.get('/all', all)
 
 /**
  * @swagger
- * /users/logout:
+ * /api/users/logout:
  *   post:
+ *     security:
+ *       - bearerAuth: [read]
  *     tags:
  *       - "User"
  *     description: logout user

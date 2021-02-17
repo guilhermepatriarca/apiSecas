@@ -4,9 +4,10 @@
   "description": "api ",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && nodemon build/index.js",
+    "start": "node build/index.js",
     "commit": "git-cz",
     "clean": "rm -rf build/*",
+    "dev": "npm run build && nodemon build/index.js",
     "build": "npm run clean && babel src -d build",
     "test": "mocha"
   },
