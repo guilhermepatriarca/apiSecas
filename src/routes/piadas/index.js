@@ -33,7 +33,7 @@ const piadas = Router()
 
 /**
  * @swagger
- * /piadas:
+ * /api/piadas:
  *   get:
  *     tags:
  *       - "Piadas"
@@ -60,7 +60,7 @@ piadas.get('/', findAll)
 /**
  * @swagger
  *
- * /piadas:
+ * /api/piadas:
  *   post:
  *     security:              # <--- ADD THIS
  *       - bearerAuth: [read]     # <--- ADD THIS
@@ -99,7 +99,7 @@ piadas.post('/', auth, create)
 
 /**
  * @swagger
- * /piadas/random:
+ * /api/piadas/random:
  *   get:
  *     tags:
  *       - "Piadas"
@@ -123,7 +123,7 @@ piadas.get('/random', random)
 
 /**
  * @swagger
- * /piadas/{piadaId}:
+ * /api/piadas/{piadaId}:
  *   get:
  *     tags:
  *       - "Piadas"
@@ -149,8 +149,10 @@ piadas.get('/:piadaId', findOne)
 /**
  * @swagger
  *
- * /piadas/{piadaId}:
+ * /api/piadas/{piadaId}:
  *   put:
+ *     security:              # <--- ADD THIS
+ *       - bearerAuth: [read]     # <--- ADD THIS
  *     tags:
  *       - "Piadas"
  *     description: Creates a user
@@ -175,8 +177,10 @@ piadas.put('/:piadaId', auth, update)
 /**
  * @swagger
  *
- * /piadas/{piadaId}:
+ * /api/piadas/{piadaId}:
  *   delete:
+ *     security:
+ *       - bearerAuth: [admin]
  *     tags:
  *       - "Piadas"
  *     description: Delete a piada

@@ -8,7 +8,7 @@ const options = {
       version: '1.0.0',
       description: 'Piadas Secas'
     },
-    basePath: '/api',
+    basePath: '/api/',
     components: {
       securitySchemes: {
         bearerAuth: {
@@ -17,12 +17,7 @@ const options = {
           bearerFormat: 'JWT'
         }
       }
-    },
-    security: [{
-      bearerAuth: [
-
-      ]
-    }]
+    }
   },
   tags: [
     {
